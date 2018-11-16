@@ -63,6 +63,8 @@ mean(unlist(lapply(Mollusca_alignment1, str_count, ("-"))))
 library(ape)
 #Converting data type for further downstream analysis. 
 dnaBin_Mollusca <- as.DNAbin(Mollusca_alignment1)
+numbers <- (1:100)
+names(dnaBin_Mollusca) <- numbers
 distanceMatrix1 <- dist.dna(dnaBin_Mollusca, model = "TN93", as.matrix = TRUE, pairwise.deletion = TRUE)
 #Cluster your sequences into OTUs 
 
@@ -75,9 +77,8 @@ clusters_Mollusca <- IdClusters(distanceMatrix1,
 clusters_Mollusca
 
 #Present a visualization of your clusters 
-plot(clusters_Mollusca[[2]], labels = NULL, hang = 0.1, 
-     main = "Cluster dendrogram", sub = NULL,
-     xlab = NULL, ylab = "Height")
+#New visualization
+plot(hang.dendrogram(clusters_Mollusca[[2]], hang = 0.03, )
 length(unique(unlist(clusters_Mollusca[1][1])))
 
 #Then I have took biological data of Mollusca and created the phylogenetic hypothesis.
@@ -140,7 +141,7 @@ length(unique(unlist(clusters_Mollusca2[1][1])))
 
 # Then merged them using total function
 
-total <- rbind(clusters_Mollusca[[2]], clusters_Mollusca2[[2]])
+total <- dend_diff(clusters_Mollusca[[2]], clusters_Mollusca2[[2]])
 total
 
 
