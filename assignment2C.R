@@ -6,9 +6,6 @@ library(rentrez)
 ##install.packages("seqinr")
 library(seqinr)
 
-##install.packages("Biostrings")
-library(Biostrings)
-
 ##install.packages("stringr")
 library(stringr)
 
