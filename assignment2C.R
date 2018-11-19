@@ -73,6 +73,8 @@ dnaBin_Mollusca <- as.DNAbin(Mollusca_alignment1)
 ###############IMPORTANT EDIT change names on dendrogram to ids, allows it to be readable, and prevents it from running so long
 numbers <- (1:100)
 names(dnaBin_Mollusca) <- numbers
+
+#creating a distance matrix to use to create dendrogram
 distanceMatrix1 <- dist.dna(dnaBin_Mollusca, model = "TN93", as.matrix = TRUE, pairwise.deletion = TRUE)
 #Cluster your sequences into OTUs 
 
@@ -82,6 +84,7 @@ clusters_Mollusca <- IdClusters(distanceMatrix1,
                               showPlot = TRUE,
                               type = "both",
                               verbose = TRUE)
+#Check: Should be getting a list with a dendrogram and clusters
 clusters_Mollusca
 
 #Present a visualization of your clusters 
@@ -123,6 +126,8 @@ mean(unlist(lapply(Mollusca_alignment2, str_count, ("-"))))
 
 #Converting data type for further downstream analysis. 
 dnaBin_Mollusca2 <- as.DNAbin(Mollusca_alignment2)
+
+#creating a distance matrix to use to create dendrogram
 distanceMatrix2 <- dist.dna(dnaBin_Mollusca2, model = "TN93", as.matrix = TRUE, pairwise.deletion = TRUE)
 #Cluster your sequences into OTUs 
 clusters_Mollusca2 <- IdClusters(distanceMatrix2,
@@ -134,11 +139,8 @@ clusters_Mollusca2 <- IdClusters(distanceMatrix2,
 #Check: Should be getting a list with a dendrogram and clusters
 clusters_Mollusca2
 
-#Present a visualization of your clusters 
-plot(clusters_Mollusca2[[2]], labels = NULL, hang = 0.1, 
-     main = "Cluster dendrogram", sub = NULL,
-     xlab = NULL, ylab = "Height")
-length(unique(unlist(clusters_Mollusca2[1][1])))
+#Present a visualization of your clusters, again this one has the hang as
+plot(hang.dendrogram(clusters_Mollusca2[[2]], hang = 0.03, ), main = "Cluster dendrogram")
 
 ###############dend_diff is a function for putting two dendrograms unto the same plot, so it can be compared properly
 total <- dend_diff(clusters_Mollusca[[2]], clusters_Mollusca2[[2]])
