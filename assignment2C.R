@@ -1,19 +1,33 @@
 # I have taken Mollusca as my biological question and created a phylogenetic hypothesis for it.
-# Install the "rentrez package".
-install.packages("rentrez")
+#Package installations------
+##install.packages("rentrez")
 library(rentrez)
 
-install.packages("seqinr")
+##install.packages("seqinr")
 library(seqinr)
 
-install.packages("Biostrings")
+##install.packages("Biostrings")
 library(Biostrings)
 
-install.packages("stringr")
+##install.packages("stringr")
 library(stringr)
 
-install.packages("tidyverse")
+##install.packages("tidyverse")
 library(tidyverse)
+
+##install.packages('dendextend')
+library(dendextend)
+
+##source("https://bioconductor.org/biocLite.R")
+##biocLite("Biostrings")
+##biocLite("muscle")
+##biocLite("DECIPHER")
+##biocLite("ape")
+library(DECIPHER)
+library(muscle)
+library(Biostrings)
+library(ape)
+
 #to find the list of available databases
 entrez_dbs() 
 #search for records of the genus Mollusca in the NCBI nucleotide data base.
@@ -46,13 +60,6 @@ dfMollusca_Subset <- dfMollusca %>%
 #I have 3 unique species 
 
 #Perform a multiple sequence alignment (MSA). Provide the code, and explain your choice of alignment algorithm and chosen arguments
-source("https://bioconductor.org/biocLite.R")
-biocLite("Biostrings")
-biocLite("muscle")
-biocLite("DECIPHER")
-library(DECIPHER)
-library(muscle)
-library(Biostrings)
 
 Mollusca_alignment1 <- DNAStringSet(muscle::muscle(stringSet, log = "log.tx", verbose = T))
 
@@ -105,13 +112,6 @@ dfMollusca2_Subset <- dfMollusca2 %>%
 #I have 3 unique species 
 
 #Perform a multiple sequence alignment (MSA). Provide the code, and explain your choice of alignment algorithm and chosen arguments
-source("https://bioconductor.org/biocLite.R")
-biocLite("Biostrings")
-biocLite("muscle")
-biocLite("DECIPHER")
-library(DECIPHER)
-library(muscle)
-library(Biostrings)
 
 Mollusca_alignment2 <- DNAStringSet(muscle::muscle(Mollusca_stringSet, log = "log.tx", verbose = T))
 
@@ -119,7 +119,6 @@ length(Mollusca_alignment2[[1]])
 lapply(Mollusca_alignment2, str_count, ("-"))
 mean(unlist(lapply(Mollusca_alignment2, str_count, ("-"))))
 
-library(ape)
 #Converting data type for further downstream analysis. 
 dnaBin_Mollusca2 <- as.DNAbin(Mollusca_alignment2)
 distanceMatrix2 <- dist.dna(dnaBin_Mollusca2, model = "TN93", as.matrix = TRUE, pairwise.deletion = TRUE)
