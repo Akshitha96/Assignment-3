@@ -15,18 +15,17 @@ library(stringr)
 ##install.packages("tidyverse")
 library(tidyverse)
 
-##install.packages("dendextend")
-library(dendextend)
-
 ##source("https://bioconductor.org/biocLite.R")
 ##biocLite("Biostrings")
 ##biocLite("muscle")
 ##biocLite("DECIPHER")
 ##biocLite("ape")
+##biocLite("dendextend")
 library(DECIPHER)
 library(muscle)
 library(Biostrings)
 library(ape)
+library(dendextend)
 
 #to find the list of available databases
 entrez_dbs() 
