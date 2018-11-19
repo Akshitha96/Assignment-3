@@ -15,7 +15,7 @@ library(stringr)
 ##install.packages("tidyverse")
 library(tidyverse)
 
-##install.packages('dendextend')
+##install.packages("dendextend")
 library(dendextend)
 
 ##source("https://bioconductor.org/biocLite.R")
