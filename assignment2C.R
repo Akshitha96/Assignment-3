@@ -67,9 +67,12 @@ length(Mollusca_alignment1[[1]])
 lapply(Mollusca_alignment1, str_count, ("-"))
 mean(unlist(lapply(Mollusca_alignment1, str_count, ("-"))))
 
-library(ape)
+
 #Converting data type for further downstream analysis. 
 dnaBin_Mollusca <- as.DNAbin(Mollusca_alignment1)
+###############IMPORTANT EDIT change names on dendrogram to ids, allows it to be readable, and prevents it from running so long
+numbers <- (1:100)
+names(dnaBin_Mollusca) <- numbers
 distanceMatrix1 <- dist.dna(dnaBin_Mollusca, model = "TN93", as.matrix = TRUE, pairwise.deletion = TRUE)
 #Cluster your sequences into OTUs 
 
@@ -82,9 +85,8 @@ clusters_Mollusca <- IdClusters(distanceMatrix1,
 clusters_Mollusca
 
 #Present a visualization of your clusters 
-plot(clusters_Mollusca[[2]], labels = NULL, hang = 0.1, 
-     main = "Cluster dendrogram", sub = NULL,
-     xlab = NULL, ylab = "Height")
+####The hang on the dendrogram causes a shift in the height of the leaves, the purpose of this change was also clarity.
+plot(hang.dendrogram(clusters_Mollusca[[2]], hang = 0.03, ), main = "Cluster dendrogram")
 length(unique(unlist(clusters_Mollusca[1][1])))
 
 #Then I have took biological data of Mollusca and created the phylogenetic hypothesis.
@@ -129,6 +131,7 @@ clusters_Mollusca2 <- IdClusters(distanceMatrix2,
                                 showPlot = TRUE,
                                 type = "both",
                                 verbose = TRUE)
+#Check: Should be getting a list with a dendrogram and clusters
 clusters_Mollusca2
 
 #Present a visualization of your clusters 
@@ -137,9 +140,8 @@ plot(clusters_Mollusca2[[2]], labels = NULL, hang = 0.1,
      xlab = NULL, ylab = "Height")
 length(unique(unlist(clusters_Mollusca2[1][1])))
 
-# Then merged them using total function
-
-total <- rbind(clusters_Mollusca[[2]], clusters_Mollusca2[[2]])
+###############dend_diff is a function for putting two dendrograms unto the same plot, so it can be compared properly
+total <- dend_diff(clusters_Mollusca[[2]], clusters_Mollusca2[[2]])
 total
 
 
