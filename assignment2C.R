@@ -77,6 +77,7 @@ mean(unlist(lapply(Mollusca_alignment1, str_count, ("-"))))
 
 #Converting data type for further downstream analysis. 
 dnaBin_Mollusca <- as.DNAbin(Mollusca_alignment1)
+
 ###############IMPORTANT EDIT change names on dendrogram to ids, allows it to be readable, and prevents it from running so long
 numbers <- (1:100)
 names(dnaBin_Mollusca) <- numbers
@@ -95,8 +96,10 @@ clusters_Mollusca <- IdClusters(distanceMatrix1,
 clusters_Mollusca
 
 #Present a visualization of your clusters 
+
 ####The hang on the dendrogram causes a shift in the height of the leaves, the purpose of this change was also clarity.
-plot(hang.dendrogram(clusters_Mollusca[[2]], hang = 0.03, ), main = "Cluster dendrogram")
+#New visualization
+plot(hang.dendrogram(clusters_Mollusca[[2]], hang = 0.03)
 length(unique(unlist(clusters_Mollusca[1][1])))
 
 #Then I have took biological data of Mollusca and created the phylogenetic hypothesis.
@@ -150,6 +153,7 @@ clusters_Mollusca2
 plot(hang.dendrogram(clusters_Mollusca2[[2]], hang = 0.03, ), main = "Cluster dendrogram")
 
 ###############dend_diff is a function for putting two dendrograms unto the same plot, so it can be compared properly
+
 total <- dend_diff(clusters_Mollusca[[2]], clusters_Mollusca2[[2]])
 total
 
