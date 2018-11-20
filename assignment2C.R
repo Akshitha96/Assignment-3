@@ -12,6 +12,15 @@ library(stringr)
 ##install.packages("tidyverse")
 library(tidyverse)
 
+##install.packages("mclust")
+library(mclust)
+
+##install.packages("dendextend")
+library(dendextend)
+
+##install.packages("dplyr")
+library(dplyr)
+
 ##source("https://bioconductor.org/biocLite.R")
 ##biocLite("Biostrings")
 ##biocLite("muscle")
