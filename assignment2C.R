@@ -1,3 +1,5 @@
+
+#Akshitha  is the original author of this script, while I, Jennien Raffington editted it.
 # I have taken Mollusca as my biological question and created a phylogenetic hypothesis for it.
 #Package installations------
 ##install.packages("rentrez")
